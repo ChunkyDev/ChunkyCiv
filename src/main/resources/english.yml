@@ -14,3 +14,32 @@ generic:
   - 'info'
   success:
   - 'success'
+  
+  
+  
+command:
+  town:
+    help:
+    - 'This command tells you a little about your town, if you belong to one.'
+    - 'There are also many sub-commands for this command.  Type &e/town ?&f for a list.'
+    status:
+    - ''
+    
+  nation:
+    help:
+    - 'This command tells you a little about your nation, if you belong to one.'
+    - 'There are also many sub-commands for this command.  Type &e/nation ?&f for a list.'
+    status:
+    - ''
+
+    
+    
+town:
+  no_town:
+  - 'You do not belong to a town!'
+  
+  
+  
+nation:
+  no_nation:
+  - 'You do not belong to a nation!'

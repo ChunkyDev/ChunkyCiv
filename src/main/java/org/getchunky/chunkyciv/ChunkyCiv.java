@@ -3,6 +3,10 @@ package org.getchunky.chunkyciv;
 import org.blockface.bukkitstats.CallHome;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
+import org.getchunky.chunky.module.ChunkyCommand;
+import org.getchunky.chunkyciv.command.CmdNation;
+import org.getchunky.chunkyciv.command.CmdTown;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.util.Logging;
@@ -49,6 +53,9 @@ public class ChunkyCiv extends JavaPlugin {
         // Register Events
         registerEvents();
 
+        // Register commands
+        registerCommands();
+
         //Call Home (usage stats)
         CallHome.load(this);
 
@@ -56,9 +63,23 @@ public class ChunkyCiv extends JavaPlugin {
         Logging.info("enabled.", true);
     }
 
-    final public void registerEvents() {
+    private void registerEvents() {
         final PluginManager pm = getServer().getPluginManager();
         // Event registering goes here
+    }
+
+    private void registerCommands() {
+        try {
+            ChunkyCommand town = new ChunkyCommand("town", new CmdTown(), null)
+                    .setAliases("t")
+                    .setHelpLines(Language.getStrings(Language.CMD_TOWN_HELP))
+                    .register();
+
+            ChunkyCommand nation = new ChunkyCommand("nation", new CmdNation(), null)
+                    .setAliases("n")
+                    .setHelpLines(Language.getStrings(Language.CMD_NATION_HELP))
+                    .register();
+        } catch (ChunkyUnregisteredException ignore) {}
     }
 
     public static ChunkyCiv getInstance() {

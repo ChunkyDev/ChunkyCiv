@@ -19,7 +19,18 @@ import java.util.List;
 public enum Language {
     ERROR("generic.error"),
     SUCCESS("generic.success"),
-    INFO("generic.info"),;
+    INFO("generic.info"),
+
+    CMD_TOWN_HELP("command.town.help"),
+    CMD_TOWN_STATUS("command.town.status"),
+
+    CMD_NATION_HELP("command.nation.help"),
+    CMD_NATION_STATUS("command.nation.status"),
+
+
+    NO_TOWN("town.no_town"),
+    NO_NATION("nation.no_nation"),
+    ;
 
     private String path;
     private static Configuration language;
