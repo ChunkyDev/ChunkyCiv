@@ -123,7 +123,7 @@
       <groupId>org.getchunky</groupId>
       <artifactId>Chunky</artifactId>
       <version>Afghan-SNAPSHOT</version>
-      <type>Chunky</type>
+      <type>jar</type>
       <scope>compile</scope>
     </dependency>
   </dependencies>
