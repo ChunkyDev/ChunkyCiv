@@ -1,5 +1,6 @@
 package org.getchunky.chunkyciv.permission;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -10,12 +11,16 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author dumptruckman
  */
 public enum Perm {
-    EXAMPLE(new Permission("ChunkyCiv.example", PermissionDefault.OP)),;
+    EXAMPLE("chunkyciv.nation.create"),;
 
     private Permission perm;
 
     Perm(Permission perm) {
         this.perm = perm;
+    }
+
+    Perm(String node) {
+        perm = Bukkit.getServer().getPluginManager().getPermission(node);
     }
 
     private Permission getPerm() {

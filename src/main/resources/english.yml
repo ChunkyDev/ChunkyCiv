@@ -14,6 +14,10 @@ generic:
   - 'info'
   success:
   - 'success'
+  in_game_only:
+  - 'You may only use this command in game!'
+  no_permission:
+  - 'You do not have sufficient permissions for this action!'
   
   
   
@@ -25,13 +29,19 @@ command:
     status:
     - ''
     
-  nation:
+  civ:
     help:
     - 'This command tells you a little about your nation, if you belong to one.'
     - 'There are also many sub-commands for this command.  Type &e/nation ?&f for a list.'
     status:
     - ''
-
+    
+    new:
+      help:
+      - 'Creates a new nation with the specified name.'
+      - 'Usage: &e/nation new <name>'
+      description:
+      - 'Creates a new nation.'
     
     
 town:
@@ -40,6 +50,10 @@ town:
   
   
   
-nation:
-  no_nation:
+civ:
+  no_civ:
   - 'You do not belong to a nation!'
+  has_civ:
+  - 'You are part of nation: %1'
+  already_exists:
+  - 'A nation by that name already exists! (%1)'

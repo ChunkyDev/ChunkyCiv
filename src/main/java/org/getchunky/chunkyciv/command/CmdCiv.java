@@ -7,7 +7,7 @@ import org.getchunky.chunky.module.ChunkyCommandExecutor;
 /**
  * @author dumptruckman
  */
-public class CmdNation implements ChunkyCommandExecutor {
+public class CmdCiv implements ChunkyCommandExecutor {
 
     public void onCommand(CommandSender sender, ChunkyCommand command, String label, String[] args) {
 

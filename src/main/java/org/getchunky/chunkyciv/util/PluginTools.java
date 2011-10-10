@@ -59,4 +59,17 @@ public class PluginTools {
                 }
         }
     }
+
+    public static String combineStringArray(String[] array) {
+        return combineStringArray(array, " ");
+    }
+
+    public static String combineStringArray(String[] array, String sep) {
+        String combined = "";
+        for (String arg : array) {
+            if (!combined.isEmpty()) combined += sep;
+            combined += arg;
+        }
+        return combined;
+    }
 }
