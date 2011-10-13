@@ -6,9 +6,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunkyciv.command.CmdCiv;
+import org.getchunky.chunkyciv.command.CmdCivNew;
 import org.getchunky.chunkyciv.command.CmdTown;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.locale.Language;
+import org.getchunky.chunkyciv.permission.Perm;
 import org.getchunky.chunkyciv.util.Logging;
 
 import java.io.IOException;
@@ -78,6 +80,15 @@ public class ChunkyCiv extends JavaPlugin {
             ChunkyCommand civ = new ChunkyCommand("civ", new CmdCiv(), null)
                     .setAliases("c", "civilization")
                     .setHelpLines(Language.getStrings(Language.CMD_CIV_HELP))
+                    .setInGameOnly(true)
+                    .register();
+
+            ChunkyCommand civNew = new ChunkyCommand("new", new CmdCivNew(), civ)
+                    .setAliases("create")
+                    .setDescription(Language.CMD_CIV_NEW_DESC.getString())
+                    .setHelpLines(Language.CMD_CIV_NEW_HELP.getStrings())
+                    .setInGameOnly(true)
+                    .setPermission(Perm.NATION_CREATE.getPermission())
                     .register();
         } catch (ChunkyUnregisteredException ignore) {}
     }

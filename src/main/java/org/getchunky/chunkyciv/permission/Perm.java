@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author dumptruckman
  */
 public enum Perm {
-    EXAMPLE("chunkyciv.nation.create"),;
+    NATION_CREATE("chunkyciv.nation.create"),;
 
     private Permission perm;
 
@@ -29,6 +29,10 @@ public enum Perm {
 
     public boolean has(CommandSender sender) {
         return sender.hasPermission(perm);
+    }
+
+    public Permission getPermission() {
+        return perm;
     }
 
     public static void load(JavaPlugin plugin) {

@@ -57,3 +57,5 @@ civ:
   - 'You are part of nation: %1'
   already_exists:
   - 'A nation by that name already exists! (%1)'
+  cannot_create_on_existing:
+  - 'You may not create a new civilization on land owned by another civilization!'

@@ -20,9 +20,7 @@ public enum Language {
     ERROR("generic.error"),
     SUCCESS("generic.success"),
     INFO("generic.info"),
-    IN_GAME("generic.in_game_only"),
-    NO_PERM("generic.no_permission"),
-
+    
     CMD_TOWN_HELP("command.town.help"),
     CMD_TOWN_STATUS("command.town.status"),
 
@@ -38,6 +36,7 @@ public enum Language {
     NO_CIV("civ.no_civ"),
     HAS_CIV("civ.has_civ"),
     CIV_EXISTS("civ.already_exists"),
+    NO_CREATE_ON_CIV("civ.cannot_create_on_existing"),
     ;
 
     private String path;
@@ -140,6 +139,10 @@ public enum Language {
 
     public String getString(Object... args) {
         return getString(this, args);
+    }
+
+    public List<String> getStrings(Object... args) {
+        return getStrings(this, args);
     }
 
     public void bad(CommandSender sender, Object... args) {
