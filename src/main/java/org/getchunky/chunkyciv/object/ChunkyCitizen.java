@@ -13,6 +13,8 @@ public class ChunkyCitizen {
     private ChunkyPlayer chunkyPlayer;
     private ChunkyNation nation = null;
 
+    private static String NATION = "civ: nation";
+
     public ChunkyCitizen(ChunkyPlayer chunkyPlayer) {
         this.chunkyPlayer = chunkyPlayer;
     }
@@ -26,12 +28,12 @@ public class ChunkyCitizen {
     }
 
     public Boolean hasNation() {
-        return this.getData().optString("nation") != null;
+        return this.getData().optString(NATION) != null;
     }
 
     public ChunkyNation getNation() {
         if (this.hasNation()) {
-            String nationId = this.getData().optString("nation");
+            String nationId = this.getData().optString(NATION);
             if (this.nation == null || !this.nation.getId().equals(nationId))
                 this.nation = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), nationId);
             return this.nation;
