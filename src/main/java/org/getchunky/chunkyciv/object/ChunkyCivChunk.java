@@ -9,7 +9,7 @@ import org.getchunky.chunkyciv.util.Logging;
  */
 public class ChunkyCivChunk {
 
-    private static String CHUNK_CIV = "civ: civilization";
+    private static String CHUNK_NATION = "civ: nation";
 
     private ChunkyChunk chunkyChunk;
 
@@ -21,27 +21,27 @@ public class ChunkyCivChunk {
         return chunkyChunk;
     }
 
-    public ChunkyCivilization getCivilization() {
-        String civId = getChunkyChunk().getData().optString(CHUNK_CIV);
+    public ChunkyNation getNation() {
+        String civId = getChunkyChunk().getData().optString(CHUNK_NATION);
         if (civId == null) return null;
-        ChunkyCivilization civ = (ChunkyCivilization)ChunkyManager.getObject(ChunkyCivilization.class.getName(), civId);
+        ChunkyNation civ = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), civId);
         if (civ == null) {
-            Logging.warning("Chunk belongs to non-existent civilization!");
-            getChunkyChunk().getData().remove(CHUNK_CIV);
+            Logging.warning("Chunk belongs to non-existent nation!");
+            getChunkyChunk().getData().remove(CHUNK_NATION);
         }
         return civ;
     }
 
-    public ChunkyCivChunk setCivilization(ChunkyCivilization civ) {
+    public ChunkyCivChunk setNation(ChunkyNation civ) {
         if (civ == null) {
-            getChunkyChunk().getData().remove(CHUNK_CIV);
+            getChunkyChunk().getData().remove(CHUNK_NATION);
             return this;
         }
-        getChunkyChunk().getData().put(CHUNK_CIV, civ.getId());
+        getChunkyChunk().getData().put(CHUNK_NATION, civ.getId());
         return this;
     }
 
-    public Boolean hasCivilization() {
-        return getChunkyChunk().getData().optString(CHUNK_CIV) != null;
+    public Boolean hasNation() {
+        return getChunkyChunk().getData().optString(CHUNK_NATION) != null;
     }
 }

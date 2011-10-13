@@ -3,12 +3,9 @@ package org.getchunky.chunkyciv;
 import org.blockface.bukkitstats.CallHome;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getchunky.chunky.Chunky;
-import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyPermissions;
-import org.getchunky.chunky.permission.PermissionFlag;
 import org.getchunky.chunkyciv.command.*;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.locale.Language;
@@ -87,32 +84,32 @@ public class ChunkyCiv extends JavaPlugin {
                     .setHelpLines(Language.getStrings(Language.CMD_TOWN_HELP))
                     .register();
 
-            ChunkyCommand civ = new ChunkyCommand("civ", new CmdCiv(), null)
-                    .setAliases("cv", "civilization")
-                    .setHelpLines(Language.getStrings(Language.CMD_CIV_HELP))
+            ChunkyCommand nation = new ChunkyCommand("nation", new CmdNation(), null)
+                    .setAliases("nat", "n")
+                    .setHelpLines(Language.getStrings(Language.CMD_NAT_HELP))
                     .setInGameOnly(true)
                     .register();
 
-            ChunkyCommand civNew = new ChunkyCommand("new", new CmdCivNew(), civ)
+            ChunkyCommand nationNew = new ChunkyCommand("new", new CmdNationNew(), nation)
                     .setAliases("create")
-                    .setDescription(Language.CMD_CIV_NEW_DESC.getString())
-                    .setHelpLines(Language.CMD_CIV_NEW_HELP.getStrings())
+                    .setDescription(Language.CMD_NAT_NEW_DESC.getString())
+                    .setHelpLines(Language.CMD_NAT_NEW_HELP.getStrings())
                     .setInGameOnly(true)
                     .setPermission(Perm.NATION_CREATE.getPermission())
                     .register();
 
-            ChunkyCommand civClaim = new ChunkyCommand("claim", new CmdCivClaim(), civ)
+            ChunkyCommand nationClaim = new ChunkyCommand("claim", new CmdNationClaim(), nation)
                     .setAliases("c")
-                    .setDescription(Language.CMD_CIV_CLAIM_DESC.getString())
-                    .setHelpLines(Language.CMD_CIV_CLAIM_HELP.getStrings())
+                    .setDescription(Language.CMD_NAT_CLAIM_DESC.getString())
+                    .setHelpLines(Language.CMD_NAT_CLAIM_HELP.getStrings())
                     .setInGameOnly(true)
                     //.setPermission(Perm.NATION_CLAIM.getPermission())
                     .register();
 
-            ChunkyCommand civUnclaim = new ChunkyCommand("unclaim", new CmdCivUnclaim(), civ)
+            ChunkyCommand nationUnclaim = new ChunkyCommand("unclaim", new CmdNationUnclaim(), nation)
                     .setAliases("uc", "u")
-                    .setDescription(Language.CMD_CIV_UNCLAIM_DESC.getString())
-                    .setHelpLines(Language.CMD_CIV_UNCLAIM_HELP.getStrings())
+                    .setDescription(Language.CMD_NAT_UNCLAIM_DESC.getString())
+                    .setHelpLines(Language.CMD_NAT_UNCLAIM_HELP.getStrings())
                     .setInGameOnly(true)
                     //.setPermission(Perm.NATION_UNCLAIM.getPermission())
                     .register();

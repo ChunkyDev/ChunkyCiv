@@ -10,7 +10,7 @@ import org.json.JSONArray;
 /**
  * @author dumptruckman
  */
-public class ChunkyCivilization extends ChunkyGroup {
+public class ChunkyNation extends ChunkyGroup {
 
     private static String HOME_CHUNK = "home chunk";
     private static String CLAIMED_CHUNKS = "claimed chunks";
@@ -18,29 +18,29 @@ public class ChunkyCivilization extends ChunkyGroup {
     public ChunkyCivChunk getHomeChunk() {
         String homeChunk = getData().optString(HOME_CHUNK);
         if (homeChunk == null) {
-            Logging.severe("Civilization '" + getName() + "' has no home chunk!");
+            Logging.severe("Nation '" + getName() + "' has no home chunk!");
             return null;
         }
         return CivManager.getCivChunk((ChunkyChunk) ChunkyManager.getObject(ChunkyChunk.class.getName(), homeChunk));
     }
 
-    public ChunkyCivilization setHomeChunk(ChunkyChunk chunk) {
+    public ChunkyNation setHomeChunk(ChunkyChunk chunk) {
         getData().put(HOME_CHUNK, chunk.getId());
         return this;
     }
 
-    public ChunkyCivilization claimChunk(ChunkyCivChunk civChunk) {
+    public ChunkyNation claimChunk(ChunkyCivChunk civChunk) {
         JSONArray chunks = getData().optJSONArray(CLAIMED_CHUNKS);
         if (chunks == null) {
             chunks = new JSONArray();
         }
         chunks.put(civChunk.getChunkyChunk().getId());
         getData().put(CLAIMED_CHUNKS, chunks);
-        civChunk.setCivilization(this);
+        civChunk.setNation(this);
         return this;
     }
 
-    public ChunkyCivilization unclaimChunk(ChunkyCivChunk civChunk) {
+    public ChunkyNation unclaimChunk(ChunkyCivChunk civChunk) {
         JSONArray chunks = getData().optJSONArray(CLAIMED_CHUNKS);
         if (chunks == null) {
             chunks = new JSONArray();
@@ -52,7 +52,7 @@ public class ChunkyCivilization extends ChunkyGroup {
             }
         }
         getData().put(CLAIMED_CHUNKS, chunks);
-        civChunk.setCivilization(null);
+        civChunk.setNation(null);
         return this;
     }
 }

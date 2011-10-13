@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class ChunkyCitizen {
 
     private ChunkyPlayer chunkyPlayer;
-    private ChunkyCivilization civilization = null;
+    private ChunkyNation nation = null;
 
     public ChunkyCitizen(ChunkyPlayer chunkyPlayer) {
         this.chunkyPlayer = chunkyPlayer;
@@ -25,23 +25,23 @@ public class ChunkyCitizen {
         return this.getChunkyPlayer().getData();
     }
 
-    public Boolean hasCivilization() {
-        return this.getData().optString("civilization") != null;
+    public Boolean hasNation() {
+        return this.getData().optString("nation") != null;
     }
 
-    public ChunkyCivilization getCivilization() {
-        if (this.hasCivilization()) {
-            String nationId = this.getData().optString("civilization");
-            if (this.civilization == null || !this.civilization.getId().equals(nationId))
-                this.civilization = (ChunkyCivilization)ChunkyManager.getObject(ChunkyCivilization.class.getName(), nationId);
-            return this.civilization;
+    public ChunkyNation getNation() {
+        if (this.hasNation()) {
+            String nationId = this.getData().optString("nation");
+            if (this.nation == null || !this.nation.getId().equals(nationId))
+                this.nation = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), nationId);
+            return this.nation;
         } else
             return null;
     }
 
     public Boolean canCivClaim() {
-        if (!this.hasCivilization()) return false;
-        ChunkyCivilization civ = this.getCivilization();
+        if (!this.hasNation()) return false;
+        ChunkyNation civ = this.getNation();
         if (civ.isOwnedBy(this.getChunkyPlayer())) return true;
         if (this.getChunkyPlayer().hasPerm(civ, CivManager.CIV_CLAIM)) return true;
         return false;

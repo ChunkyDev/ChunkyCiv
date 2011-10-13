@@ -24,32 +24,32 @@ public enum Language {
     CMD_TOWN_HELP("command.town.help"),
     CMD_TOWN_STATUS("command.town.status"),
 
-    CMD_CIV_HELP("command.civ.help"),
-    CMD_CIV_STATUS("command.civ.status"),
-    CMD_CIV_NEW_HELP("command.civ.new.help"),
-    CMD_CIV_NEW_DESC("command.civ.new.description"),
-    CMD_CIV_CLAIM_HELP("command.civ.claim.help"),
-    CMD_CIV_CLAIM_DESC("command.civ.claim.description"),
-    CMD_CIV_UNCLAIM_HELP("command.civ.unclaim.help"),
-    CMD_CIV_UNCLAIM_DESC("command.civ.unclaim.description"),
+    CMD_NAT_HELP("command.nat.help"),
+    CMD_NAT_STATUS("command.nat.status"),
+    CMD_NAT_NEW_HELP("command.nat.new.help"),
+    CMD_NAT_NEW_DESC("command.nat.new.description"),
+    CMD_NAT_CLAIM_HELP("command.nat.claim.help"),
+    CMD_NAT_CLAIM_DESC("command.nat.claim.description"),
+    CMD_NAT_UNCLAIM_HELP("command.nat.unclaim.help"),
+    CMD_NAT_UNCLAIM_DESC("command.nat.unclaim.description"),
 
 
     NO_TOWN("town.no_town"),
 
 
-    CHUNK_HAS_CIV("chunk.has_civ"),
-    CHUNK_NO_CIV("chunk.no_civ"),
-    CHUNK_CIV("chunk.civ"),
+    CHUNK_HAS_NAT("chunk.has_nat"),
+    CHUNK_NO_NAT("chunk.no_nat"),
+    CHUNK_NAT("chunk.nat"),
 
     
-    NO_CIV("civ.no_civ"),
-    HAS_CIV("civ.has_civ"),
-    CIV_EXISTS("civ.already_exists"),
-    NO_CREATE_ON_CIV("civ.cannot_create_on_existing"),
-    CIV_CLAIM_CHUNK("civ.claim_chunk"),
-    CIV_UNCLAIM_CHUNK("civ.unclaim_chunk"),
-    CIV_NO_PERM_CLAIM("civ.no_perm.claim"),
-    CIV_NO_PERM_UNCLAIM("civ.no_perm.unclaim"),
+    NO_NAT("nat.no_nat"),
+    HAS_NAT("nat.has_nat"),
+    NAT_EXISTS("nat.already_exists"),
+    NO_CREATE_ON_NAT("nat.cannot_create_on_existing"),
+    NAT_CLAIM_CHUNK("nat.claim_chunk"),
+    NAT_UNCLAIM_CHUNK("nat.unclaim_chunk"),
+    NAT_NO_PERM_CLAIM("nat.no_perm.claim"),
+    NAT_NO_PERM_UNCLAIM("nat.no_perm.unclaim"),
     ;
 
     private String path;

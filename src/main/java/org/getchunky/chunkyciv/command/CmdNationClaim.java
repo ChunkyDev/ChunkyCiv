@@ -9,38 +9,33 @@ import org.getchunky.chunkyciv.CivManager;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.object.ChunkyCitizen;
 import org.getchunky.chunkyciv.object.ChunkyCivChunk;
-import org.getchunky.chunkyciv.object.ChunkyCivilization;
+import org.getchunky.chunkyciv.object.ChunkyNation;
 
 /**
  * @author dumptruckman
  */
-public class CmdCivUnclaim implements ChunkyCommandExecutor {
+public class CmdNationClaim implements ChunkyCommandExecutor {
 
     public void onCommand(CommandSender sender, ChunkyCommand command, String label, String[] args) {
-        ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer((Player) sender));
+        ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer((Player)sender));
 
-        if (!citizen.hasCivilization()) {
-            Language.NO_CIV.bad(sender);
+        if (!citizen.hasNation()) {
+            Language.NO_NAT.bad(sender);
             return;
         }
         if (!citizen.canCivClaim()) {
-            Language.CIV_NO_PERM_UNCLAIM.bad(sender);
+            Language.NAT_NO_PERM_CLAIM.bad(sender);
             return;
         }
 
         ChunkyCivChunk civChunk = CivManager.getCivChunk(citizen.getChunkyPlayer().getCurrentChunk());
-        if (!civChunk.hasCivilization()) {
-            Language.CHUNK_NO_CIV.bad(sender);
+        if (civChunk.hasNation()) {
+            Language.CHUNK_HAS_NAT.bad(sender, civChunk.getNation().getName());
             return;
         }
 
-        if (!civChunk.getCivilization().equals(citizen.getCivilization())) {
-            Language.CHUNK_CIV.bad(sender, civChunk.getCivilization().getName());
-            return;
-        }
-
-        ChunkyCivilization civ = citizen.getCivilization();
-        civ.unclaimChunk(civChunk);
-        Language.CIV_UNCLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
+        ChunkyNation civ = citizen.getNation();
+        civ.claimChunk(civChunk);
+        Language.NAT_CLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
     }
 }

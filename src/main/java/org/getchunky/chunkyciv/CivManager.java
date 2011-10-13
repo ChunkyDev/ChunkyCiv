@@ -7,7 +7,7 @@ import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunky.permission.PermissionFlag;
 import org.getchunky.chunkyciv.object.ChunkyCitizen;
 import org.getchunky.chunkyciv.object.ChunkyCivChunk;
-import org.getchunky.chunkyciv.object.ChunkyCivilization;
+import org.getchunky.chunkyciv.object.ChunkyNation;
 import org.getchunky.chunkyciv.util.Logging;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class CivManager {
     public static PermissionFlag CIV_UNCLAIM = new PermissionFlag("Civ Unclaim", "cu");
 
     private static HashMap<ChunkyPlayer, ChunkyCitizen> citizensMap = new HashMap<ChunkyPlayer, ChunkyCitizen>();
-    private static HashMap<String, ChunkyCivilization> civilizationsMap = new HashMap<String, ChunkyCivilization>();
+    private static HashMap<String, ChunkyNation> nationsMap = new HashMap<String, ChunkyNation>();
     private static HashMap<ChunkyChunk, ChunkyCivChunk> chunksMap = new HashMap<ChunkyChunk, ChunkyCivChunk>();
 
     public static ChunkyCitizen getCitizen(ChunkyPlayer player) {
@@ -33,30 +33,30 @@ public class CivManager {
         return cit;
     }
 
-    public static ChunkyCivilization getCivilization(String name) {
-        ChunkyCivilization civilization = civilizationsMap.get(name);
-        if (civilization == null) {
-            for (ChunkyObject object : ChunkyManager.getObjectsOfType(ChunkyCivilization.class.getName()).values()) {
+    public static ChunkyNation getNation(String name) {
+        ChunkyNation nation = nationsMap.get(name);
+        if (nation == null) {
+            for (ChunkyObject object : ChunkyManager.getObjectsOfType(ChunkyNation.class.getName()).values()) {
                 if (object.getName().equalsIgnoreCase(name)) {
-                    civilization = (ChunkyCivilization)object;
-                    civilizationsMap.put(civilization.getName(), civilization);
+                    nation = (ChunkyNation)object;
+                    nationsMap.put(nation.getName(), nation);
                     break;
                 }
             }
         }
-        Logging.debug("Got civilization: " + civilization);
-        return civilization;
+        Logging.debug("Got nation: " + nation);
+        return nation;
     }
 
-    public static ChunkyCivilization createCivilization(String name) {
-        ChunkyCivilization civilization = getCivilization(name);
-        if (civilization != null)
+    public static ChunkyNation createNation(String name) {
+        ChunkyNation nation = getNation(name);
+        if (nation != null)
             return null;
-        civilization = new ChunkyCivilization();
-        civilization.setId(ChunkyManager.getUniqueId());
-        civilization.setName(name);
-        Logging.debug("Created a new civilization: " + name);
-        return civilization;
+        nation = new ChunkyNation();
+        nation.setId(ChunkyManager.getUniqueId());
+        nation.setName(name);
+        Logging.debug("Created a new nation: " + name);
+        return nation;
     }
     
     public static ChunkyCivChunk getCivChunk(ChunkyChunk chunk) {
