@@ -39,4 +39,20 @@ public class ChunkyCivilization extends ChunkyGroup {
         civChunk.setCivilization(this);
         return this;
     }
+
+    public ChunkyCivilization unclaimChunk(ChunkyCivChunk civChunk) {
+        JSONArray chunks = getData().optJSONArray(CLAIMED_CHUNKS);
+        if (chunks == null) {
+            chunks = new JSONArray();
+        }
+        for (int i = 0; i < chunks.length(); i++) {
+            if (chunks.getString(i).equals(civChunk.getChunkyChunk().getId())) {
+                chunks.remove(i);
+                break;
+            }
+        }
+        getData().put(CLAIMED_CHUNKS, chunks);
+        civChunk.setCivilization(null);
+        return this;
+    }
 }

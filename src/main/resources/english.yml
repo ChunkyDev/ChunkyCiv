@@ -31,17 +31,32 @@ command:
     
   civ:
     help:
-    - 'This command tells you a little about your nation, if you belong to one.'
-    - 'There are also many sub-commands for this command.  Type &e/nation ?&f for a list.'
+    - 'This command tells you a little about your civilization, if you belong to one.'
+    - 'There are also many sub-commands for this command.  Type &e/civ ?&f for a list.'
     status:
     - ''
     
     new:
       help:
-      - 'Creates a new nation with the specified name.'
-      - 'Usage: &e/nation new <name>'
+      - 'Creates a new civilization with the specified name.'
+      - 'The chunk you are in will be the civilization's home chunk.'
+      - 'Usage: &e/civ new <name>'
       description:
-      - 'Creates a new nation.'
+      - 'Creates a new civilization.'
+      
+    claim:
+      help:
+      - 'Mark a chunk not claimed by another civ as part of your own civilization.'
+      - 'The chunk will still be claimable by people with no civ or part of your civ.'
+      description:
+      - 'Marks this chunk as part of your civilization'
+      
+    unclaim:
+      help:
+      - 'Abandon a chunk claimed by your civilization.'
+      description:
+      - 'Abandons this chunk as part of your civilization'
+    
     
     
 town:
@@ -50,12 +65,32 @@ town:
   
   
   
+chunk:
+  has_civ:
+  - 'This chunk belongs to civ: %1'
+  no_civ:
+  - 'This chunk does not belong to a civilization!'
+  civ:
+  - 'This chunk belongs to civ: %1'
+  
+  
+  
 civ:
   no_civ:
-  - 'You do not belong to a nation!'
+  - 'You do not belong to a civilization!'
   has_civ:
-  - 'You are part of nation: %1'
+  - 'You are part of civilization: %1'
   already_exists:
-  - 'A nation by that name already exists! (%1)'
+  - 'A civilization by that name already exists! (%1)'
   cannot_create_on_existing:
   - 'You may not create a new civilization on land owned by another civilization!'
+  claim_chunk:
+  - '%1 has claimed chunk at %2'
+  unclaim_chunk:
+  - '%1 has unclaimed chunk at %2'
+  
+  no_perm:
+    claim:
+    - 'You do not have permission to claim chunks for your civ.'
+    unclaim:
+    - 'You do not have permission to unclaim chunks for your civ.'

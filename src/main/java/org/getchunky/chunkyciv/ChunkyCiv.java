@@ -3,11 +3,13 @@ package org.getchunky.chunkyciv;
 import org.blockface.bukkitstats.CallHome;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getchunky.chunky.Chunky;
+import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
 import org.getchunky.chunky.module.ChunkyCommand;
-import org.getchunky.chunkyciv.command.CmdCiv;
-import org.getchunky.chunkyciv.command.CmdCivNew;
-import org.getchunky.chunkyciv.command.CmdTown;
+import org.getchunky.chunky.module.ChunkyPermissions;
+import org.getchunky.chunky.permission.PermissionFlag;
+import org.getchunky.chunkyciv.command.*;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.permission.Perm;
@@ -54,9 +56,13 @@ public class ChunkyCiv extends JavaPlugin {
 
         // Register Events
         registerEvents();
+        registerChunkyEvents();
 
         // Register commands
         registerCommands();
+
+        // Register custom Chunky permissions
+        registerChunkyPermissions();
 
         //Call Home (usage stats)
         CallHome.load(this);
@@ -70,6 +76,10 @@ public class ChunkyCiv extends JavaPlugin {
         // Event registering goes here
     }
 
+    private void registerChunkyEvents() {
+        
+    }
+
     private void registerCommands() {
         try {
             ChunkyCommand town = new ChunkyCommand("town", new CmdTown(), null)
@@ -78,7 +88,7 @@ public class ChunkyCiv extends JavaPlugin {
                     .register();
 
             ChunkyCommand civ = new ChunkyCommand("civ", new CmdCiv(), null)
-                    .setAliases("c", "civilization")
+                    .setAliases("cv", "civilization")
                     .setHelpLines(Language.getStrings(Language.CMD_CIV_HELP))
                     .setInGameOnly(true)
                     .register();
@@ -90,7 +100,28 @@ public class ChunkyCiv extends JavaPlugin {
                     .setInGameOnly(true)
                     .setPermission(Perm.NATION_CREATE.getPermission())
                     .register();
+
+            ChunkyCommand civClaim = new ChunkyCommand("claim", new CmdCivClaim(), civ)
+                    .setAliases("c")
+                    .setDescription(Language.CMD_CIV_CLAIM_DESC.getString())
+                    .setHelpLines(Language.CMD_CIV_CLAIM_HELP.getStrings())
+                    .setInGameOnly(true)
+                    //.setPermission(Perm.NATION_CLAIM.getPermission())
+                    .register();
+
+            ChunkyCommand civUnclaim = new ChunkyCommand("unclaim", new CmdCivUnclaim(), civ)
+                    .setAliases("uc", "u")
+                    .setDescription(Language.CMD_CIV_UNCLAIM_DESC.getString())
+                    .setHelpLines(Language.CMD_CIV_UNCLAIM_HELP.getStrings())
+                    .setInGameOnly(true)
+                    //.setPermission(Perm.NATION_UNCLAIM.getPermission())
+                    .register();
         } catch (ChunkyUnregisteredException ignore) {}
+    }
+
+    private void registerChunkyPermissions() {
+        ChunkyPermissions.registerPermissionFlag(CivManager.CIV_CLAIM);
+        ChunkyPermissions.registerPermissionFlag(CivManager.CIV_UNCLAIM);
     }
 
     public static ChunkyCiv getInstance() {

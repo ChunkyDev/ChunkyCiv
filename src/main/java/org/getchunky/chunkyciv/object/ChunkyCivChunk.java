@@ -33,7 +33,15 @@ public class ChunkyCivChunk {
     }
 
     public ChunkyCivChunk setCivilization(ChunkyCivilization civ) {
+        if (civ == null) {
+            getChunkyChunk().getData().remove(CHUNK_CIV);
+            return this;
+        }
         getChunkyChunk().getData().put(CHUNK_CIV, civ.getId());
         return this;
+    }
+
+    public Boolean hasCivilization() {
+        return getChunkyChunk().getData().optString(CHUNK_CIV) != null;
     }
 }

@@ -4,6 +4,7 @@ import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyChunk;
 import org.getchunky.chunky.object.ChunkyObject;
 import org.getchunky.chunky.object.ChunkyPlayer;
+import org.getchunky.chunky.permission.PermissionFlag;
 import org.getchunky.chunkyciv.object.ChunkyCitizen;
 import org.getchunky.chunkyciv.object.ChunkyCivChunk;
 import org.getchunky.chunkyciv.object.ChunkyCivilization;
@@ -15,6 +16,9 @@ import java.util.HashMap;
  * @author dumptruckman
  */
 public class CivManager {
+
+    public static PermissionFlag CIV_CLAIM = new PermissionFlag("Civ Claim", "cc");
+    public static PermissionFlag CIV_UNCLAIM = new PermissionFlag("Civ Unclaim", "cu");
 
     private static HashMap<ChunkyPlayer, ChunkyCitizen> citizensMap = new HashMap<ChunkyPlayer, ChunkyCitizen>();
     private static HashMap<String, ChunkyCivilization> civilizationsMap = new HashMap<String, ChunkyCivilization>();

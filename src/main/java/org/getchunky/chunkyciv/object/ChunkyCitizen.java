@@ -2,6 +2,7 @@ package org.getchunky.chunkyciv.object;
 
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyPlayer;
+import org.getchunky.chunkyciv.CivManager;
 import org.json.JSONObject;
 
 /**
@@ -36,5 +37,13 @@ public class ChunkyCitizen {
             return this.civilization;
         } else
             return null;
+    }
+
+    public Boolean canCivClaim() {
+        if (!this.hasCivilization()) return false;
+        ChunkyCivilization civ = this.getCivilization();
+        if (civ.isOwnedBy(this.getChunkyPlayer())) return true;
+        if (this.getChunkyPlayer().hasPerm(civ, CivManager.CIV_CLAIM)) return true;
+        return false;
     }
 }
