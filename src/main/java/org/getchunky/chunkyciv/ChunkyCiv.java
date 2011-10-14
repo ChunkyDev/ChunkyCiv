@@ -1,6 +1,7 @@
 package org.getchunky.chunkyciv;
 
 import org.blockface.bukkitstats.CallHome;
+import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
@@ -8,9 +9,14 @@ import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyPermissions;
 import org.getchunky.chunkyciv.command.*;
 import org.getchunky.chunkyciv.config.Config;
+import org.getchunky.chunkyciv.listener.BlockMonitor;
+import org.getchunky.chunkyciv.listener.EntityMonitor;
+import org.getchunky.chunkyciv.listener.PlayerMonitor;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.permission.Perm;
+import org.getchunky.chunkyciv.task.ActionTracker;
 import org.getchunky.chunkyciv.util.Logging;
+import org.getchunky.chunkyciv.util.MinecraftTools;
 
 import java.io.IOException;
 
@@ -58,6 +64,9 @@ public class ChunkyCiv extends JavaPlugin {
         // Register commands
         registerCommands();
 
+        // Register scheduled tasks
+        registerTasks();
+
         // Register custom Chunky permissions
         registerChunkyPermissions();
 
@@ -71,10 +80,25 @@ public class ChunkyCiv extends JavaPlugin {
     private void registerEvents() {
         final PluginManager pm = getServer().getPluginManager();
         // Event registering goes here
+        EntityMonitor entityMonitor = new EntityMonitor();
+        PlayerMonitor playerMonitor = new PlayerMonitor();
+        BlockMonitor blockMonitor = new BlockMonitor();
+        pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityMonitor, Event.Priority.Monitor, this);
+        pm.registerEvent(Event.Type.PLAYER_CHAT, playerMonitor, Event.Priority.Monitor, this);
+        pm.registerEvent(Event.Type.BLOCK_BREAK, blockMonitor, Event.Priority.Monitor, this);
+        pm.registerEvent(Event.Type.BLOCK_PLACE, blockMonitor, Event.Priority.Monitor, this);
     }
 
     private void registerChunkyEvents() {
         
+    }
+
+    private void registerTasks() {
+        getServer().getScheduler().scheduleAsyncRepeatingTask(
+                this,
+                new ActionTracker(),
+                MinecraftTools.convertSecondsToTicks(60),
+                MinecraftTools.convertSecondsToTicks(60));
     }
 
     private void registerCommands() {
