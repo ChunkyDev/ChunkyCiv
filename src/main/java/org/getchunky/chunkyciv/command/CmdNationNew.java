@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyCommandExecutor;
+import org.getchunky.chunky.object.ChunkyObject;
+import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunkyciv.CivManager;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.object.ChunkyCitizen;
@@ -37,7 +39,16 @@ public class CmdNationNew implements ChunkyCommandExecutor {
             return;
         }
 
-        String name = PluginTools.combineStringArray(args);
+        ChunkyObject chunkOwner = civChunk.getChunkyChunk().getOwner();
+        if (chunkOwner != null && chunkOwner instanceof ChunkyPlayer) {
+            ChunkyCitizen ownerCitizen = CivManager.getCitizen((ChunkyPlayer)chunkOwner);
+            if (ownerCitizen.hasNation()) {
+                Language.BELONGS_TO_OTHERS_CIT.bad(sender, ownerCitizen.getNation().getName());
+                return;
+            }
+        }
+
+                String name = PluginTools.combineStringArray(args);
         nation = CivManager.createNation(name);
         if (nation == null) {
             Language.NAT_EXISTS.bad(sender, nation.getName());

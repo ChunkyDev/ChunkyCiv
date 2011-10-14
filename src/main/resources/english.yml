@@ -84,6 +84,8 @@ nat:
   - 'A nation by that name already exists! (%1)'
   cannot_create_on_existing:
   - 'You may not create a new nation on land owned by another nation!'
+  belongs_to_others_cit:
+  - 'This land belongs to a citizen of %1!'
   claim_chunk:
   - '%1 has claimed chunk at %2'
   unclaim_chunk:
