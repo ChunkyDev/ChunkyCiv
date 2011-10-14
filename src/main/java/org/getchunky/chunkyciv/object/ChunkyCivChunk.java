@@ -3,13 +3,14 @@ package org.getchunky.chunkyciv.object;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyChunk;
 import org.getchunky.chunkyciv.util.Logging;
+import org.json.JSONObject;
 
 /**
  * @author dumptruckman
  */
 public class ChunkyCivChunk {
 
-    private static String CHUNK_NATION = "civ: nation";
+    private static String CHUNK_NATION = "nation";
 
     private ChunkyChunk chunkyChunk;
 
@@ -21,27 +22,36 @@ public class ChunkyCivChunk {
         return chunkyChunk;
     }
 
+    public JSONObject getData() {
+        JSONObject data = this.getChunkyChunk().getData().optJSONObject("ChunkyCiv");
+        if (data == null) {
+            data = new JSONObject();
+            this.getChunkyChunk().getData().put("ChunkyCiv", data);
+        }
+        return data;
+    }
+
     public ChunkyNation getNation() {
-        String civId = getChunkyChunk().getData().optString(CHUNK_NATION);
+        String civId = this.getData().optString(CHUNK_NATION);
         if (civId == null) return null;
         ChunkyNation civ = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), civId);
         if (civ == null) {
             Logging.warning("Chunk belongs to non-existent nation!");
-            getChunkyChunk().getData().remove(CHUNK_NATION);
+            this.getData().remove(CHUNK_NATION);
         }
         return civ;
     }
 
     public ChunkyCivChunk setNation(ChunkyNation civ) {
         if (civ == null) {
-            getChunkyChunk().getData().remove(CHUNK_NATION);
+            this.getData().remove(CHUNK_NATION);
             return this;
         }
-        getChunkyChunk().getData().put(CHUNK_NATION, civ.getId());
+        this.getData().put(CHUNK_NATION, civ.getId());
         return this;
     }
 
     public Boolean hasNation() {
-        return getChunkyChunk().getData().optString(CHUNK_NATION) != null;
+        return this.getData().optString(CHUNK_NATION) != null;
     }
 }

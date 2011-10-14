@@ -13,13 +13,13 @@ public class ChunkyCitizen {
     private ChunkyPlayer chunkyPlayer;
     private ChunkyNation nation = null;
 
-    private static String NATION = "civ: nation";
-    private static String ACTION_TOTAL = "civ: total action count";
-    private static String PLAYER_ATTACK_TOTAL = "civ: total player attack count";
-    private static String MONSTER_ATTACK_TOTAL = "civ: total monster attack count";
-    private static String CHAT_TOTAL = "civ: total chat count";
-    private static String PLACE_TOTAL = "civ: total place count";
-    private static String BREAK_TOTAL = "civ: total break count";
+    private static String NATION = "nation";
+    private static String ACTION_TOTAL = "total action count";
+    private static String PLAYER_ATTACK_TOTAL = "total player attack count";
+    private static String MONSTER_ATTACK_TOTAL = "total monster attack count";
+    private static String CHAT_TOTAL = "total chat count";
+    private static String PLACE_TOTAL = "total place count";
+    private static String BREAK_TOTAL = "total break count";
 
     public ChunkyCitizen(ChunkyPlayer chunkyPlayer) {
         this.chunkyPlayer = chunkyPlayer;
@@ -30,7 +30,21 @@ public class ChunkyCitizen {
     }
 
     public JSONObject getData() {
-        return this.getChunkyPlayer().getData();
+        JSONObject data = this.getChunkyPlayer().getData().optJSONObject("ChunkyCiv");
+        if (data == null) {
+            data = new JSONObject();
+            this.getChunkyPlayer().getData().put("ChunkyCiv", data);
+        }
+        return data;
+    }
+
+    public JSONObject getTrackingData() {
+        JSONObject data = this.getData().optJSONObject("Action Tracking");
+        if (data == null) {
+            data = new JSONObject();
+            this.getData().put("Action Tracking", data);
+        }
+        return data;
     }
 
     public Boolean hasNation() {
@@ -56,50 +70,50 @@ public class ChunkyCitizen {
     }
 
     public Long getTotalActionCount() {
-        return getData().optLong(ACTION_TOTAL);
+        return this.getTrackingData().optLong(ACTION_TOTAL);
     }
 
     public void incActionCount() {
-        getData().put(ACTION_TOTAL, getTotalActionCount());
+        this.getTrackingData().put(ACTION_TOTAL, getTotalActionCount());
     }
 
     public Long getTotalPlayerAttackCount() {
-        return getData().optLong(PLAYER_ATTACK_TOTAL);
+        return this.getTrackingData().optLong(PLAYER_ATTACK_TOTAL);
     }
 
     public void incPlayerAttackCount() {
-        getData().put(PLAYER_ATTACK_TOTAL, getTotalPlayerAttackCount());
+        this.getTrackingData().put(PLAYER_ATTACK_TOTAL, getTotalPlayerAttackCount());
     }
 
     public Long getTotalMonsterAttackCount() {
-        return getData().optLong(MONSTER_ATTACK_TOTAL);
+        return this.getTrackingData().optLong(MONSTER_ATTACK_TOTAL);
     }
 
     public void incMonsterAttackCount() {
-        getData().put(MONSTER_ATTACK_TOTAL, getTotalMonsterAttackCount());
+        this.getTrackingData().put(MONSTER_ATTACK_TOTAL, getTotalMonsterAttackCount());
     }
 
     public Long getTotalChatCount() {
-        return getData().optLong(CHAT_TOTAL);
+        return this.getTrackingData().optLong(CHAT_TOTAL);
     }
 
     public void incChatCount() {
-        getData().put(CHAT_TOTAL, getTotalChatCount());
+        this.getTrackingData().put(CHAT_TOTAL, getTotalChatCount());
     }
 
     public Long getTotalPlaceCount() {
-        return getData().optLong(PLACE_TOTAL);
+        return this.getTrackingData().optLong(PLACE_TOTAL);
     }
 
     public void incPlaceCount() {
-        getData().put(PLACE_TOTAL, getTotalPlaceCount());
+        this.getTrackingData().put(PLACE_TOTAL, getTotalPlaceCount());
     }
 
     public Long getTotalBreakCount() {
-        return getData().optLong(BREAK_TOTAL);
+        return this.getTrackingData().optLong(BREAK_TOTAL);
     }
 
     public void incBreakCount() {
-        getData().put(BREAK_TOTAL, getTotalBreakCount());
+        this.getTrackingData().put(BREAK_TOTAL, getTotalBreakCount());
     }
 }
