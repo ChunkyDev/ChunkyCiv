@@ -4,12 +4,15 @@ import org.blockface.bukkitstats.CallHome;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getchunky.chunky.Chunky;
+import org.getchunky.chunky.event.ChunkyEvent;
 import org.getchunky.chunky.exceptions.ChunkyUnregisteredException;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyPermissions;
 import org.getchunky.chunkyciv.command.*;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.listener.BlockMonitor;
+import org.getchunky.chunkyciv.listener.ChunkyPlayerEvents;
 import org.getchunky.chunkyciv.listener.EntityMonitor;
 import org.getchunky.chunkyciv.listener.PlayerMonitor;
 import org.getchunky.chunkyciv.locale.Language;
@@ -90,7 +93,7 @@ public class ChunkyCiv extends JavaPlugin {
     }
 
     private void registerChunkyEvents() {
-        
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CHANGE, new ChunkyPlayerEvents(), ChunkyEvent.Priority.Normal, this);
     }
 
     private void registerTasks() {
