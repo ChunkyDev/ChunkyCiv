@@ -50,6 +50,7 @@ public enum Language {
     NAT_UNCLAIM_CHUNK("nat.unclaim_chunk"),
     NAT_NO_PERM_CLAIM("nat.no_perm.claim"),
     NAT_NO_PERM_UNCLAIM("nat.no_perm.unclaim"),
+    NAT_CLAIM_LIMIT("nat.claim_limit"),
     BELONGS_TO_OTHERS_CIT("nat.belongs_to_others_cit"),
     ;
 

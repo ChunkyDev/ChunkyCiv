@@ -90,6 +90,8 @@ nat:
   - '%1 has claimed chunk at %2'
   unclaim_chunk:
   - '%1 has unclaimed chunk at %2'
+  claim_limit:
+  - 'Your nation has reached it chunk limit (%1/%2)'
   
   no_perm:
     claim:

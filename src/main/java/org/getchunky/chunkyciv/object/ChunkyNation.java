@@ -3,7 +3,9 @@ package org.getchunky.chunkyciv.object;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyChunk;
 import org.getchunky.chunky.object.ChunkyGroup;
+import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunkyciv.CivManager;
+import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.util.Logging;
 import org.json.JSONArray;
 
@@ -14,6 +16,7 @@ public class ChunkyNation extends ChunkyGroup {
 
     private static String HOME_CHUNK = "home chunk";
     private static String CLAIMED_CHUNKS = "claimed chunks";
+    private static String BONUS_CHUNKS = "bonus chunk claims";
 
     public ChunkyCivChunk getHomeChunk() {
         String homeChunk = getData().optString(HOME_CHUNK);
@@ -54,5 +57,28 @@ public class ChunkyNation extends ChunkyGroup {
         getData().put(CLAIMED_CHUNKS, chunks);
         civChunk.setNation(null);
         return this;
+    }
+
+    public JSONArray getChunks() {
+        JSONArray chunks = getData().optJSONArray(CLAIMED_CHUNKS);
+        if (chunks == null) {
+            chunks = new JSONArray();
+        }
+        return chunks;
+    }
+
+    public Integer getClaimLimit() {
+        return Config.DEFAULT_NATION_CHUNK_LIMIT.getInt()
+                * this.getMembers().get(ChunkyPlayer.class.getName()).size()
+                + getBonusChunks();
+    }
+
+    public Integer getBonusChunks() {
+        return this.getData().optInt(BONUS_CHUNKS);
+    }
+
+    public void setBonusChunks(Integer limit) {
+        getData().put(BONUS_CHUNKS, limit);
+        save();
     }
 }

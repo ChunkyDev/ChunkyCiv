@@ -46,6 +46,12 @@ public class CmdNationClaim implements ChunkyCommandExecutor {
         }
 
         ChunkyNation civ = citizen.getNation();
+
+        if (civ.getChunks().length() >= civ.getClaimLimit()) {
+            Language.NAT_CLAIM_LIMIT.bad(sender, civ.getChunks().length(), civ.getClaimLimit());
+            return;
+        }
+
         civ.claimChunk(civChunk);
         Language.NAT_CLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
     }
