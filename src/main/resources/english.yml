@@ -39,7 +39,7 @@ command:
     new:
       help:
       - 'Creates a new nation with the specified name.'
-      - 'The chunk you are in will be the nation's home chunk.'
+      - 'The chunk you are in will be the nation''s home chunk.'
       - 'Usage: &e/nation new <name>'
       description:
       - 'Creates a new nation.'
