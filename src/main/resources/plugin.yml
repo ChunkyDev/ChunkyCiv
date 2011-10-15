@@ -3,7 +3,7 @@ main: org.getchunky.chunkyciv.ChunkyCiv
 version: b${build.number}
 author: dumptruckman
 
-depends: [Chunky]
+depend: [Chunky]
 
 permissions:
     chunkyciv.nation.create:
