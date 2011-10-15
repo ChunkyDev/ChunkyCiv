@@ -42,6 +42,9 @@ public class ChunkyCiv extends JavaPlugin {
         // Grab the PluginManager
         final PluginManager pm = getServer().getPluginManager();
 
+        // initialize the logger.
+        Logging.load();
+
         // Loads the configuration
         try {
             Config.load();
