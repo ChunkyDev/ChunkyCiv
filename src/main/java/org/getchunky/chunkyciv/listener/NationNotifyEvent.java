@@ -15,8 +15,9 @@ public class NationNotifyEvent extends ChunkyPlayerListener {
         ChunkyCivChunk civToChunk = CivManager.getCivChunk(event.getToChunk());
         ChunkyCivChunk civFromChunk = CivManager.getCivChunk(event.getFromChunk());
         ChunkyNation toChunkNation = civToChunk.getNation();
-        if ((civFromChunk.hasNation() && !civFromChunk.getNation().equals(toChunkNation))
-                || (!civFromChunk.hasNation() && civToChunk.hasNation())) {
+        if ((civFromChunk.hasNation() && civToChunk.hasNation() && !civFromChunk.getNation().equals(toChunkNation))
+                || (!civFromChunk.hasNation() && civToChunk.hasNation())
+                || (civFromChunk.hasNation() && !civToChunk.hasNation())) {
             String nationName;
             if (toChunkNation != null)
                 nationName = " [Nation: " + toChunkNation.getName() + "]";
