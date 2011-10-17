@@ -59,5 +59,7 @@ public class CmdNationNew implements ChunkyCommandExecutor {
         nation.claimChunk(civChunk).setHomeChunk(civChunk.getChunkyChunk()).save();
         nation.addMember(citizen.getChunkyPlayer());
         citizen.setNation(nation).save();
+
+        Language.NAT_NEW.good(sender, nation.getName());
     }
 }
