@@ -54,11 +54,11 @@ public class ActionTracker implements Runnable {
             Boolean wasTracked = playerPlayerAttack.contains(player);
             playerPlayerAttack.add(player);
 
+            trackAction(player);
             if (!wasTracked) {
                 ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer(player));
                 citizen.incPlayerAttackCount();
             }
-            trackAction(player);
         } catch (Exception ignore) {}
     }
 
@@ -67,11 +67,11 @@ public class ActionTracker implements Runnable {
             Boolean wasTracked = playerMonsterAttack.contains(player);
             playerMonsterAttack.add(player);
 
+            trackAction(player);
             if (!wasTracked) {
                 ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer(player));
                 citizen.incMonsterAttackCount();
             }
-            trackAction(player);
         } catch (Exception ignore) {}
     }
 
@@ -80,11 +80,11 @@ public class ActionTracker implements Runnable {
             Boolean wasTracked = playerChat.contains(player);
             playerChat.add(player);
 
+            trackAction(player);
             if (!wasTracked) {
                 ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer(player));
                 citizen.incChatCount();
             }
-            trackAction(player);
         } catch (Exception ignore) {}
     }
 
@@ -93,11 +93,11 @@ public class ActionTracker implements Runnable {
             Boolean wasTracked = playerPlace.contains(player);
             playerPlace.add(player);
 
+            trackAction(player);
             if (!wasTracked) {
                 ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer(player));
                 citizen.incPlaceCount();
             }
-            trackAction(player);
         } catch (Exception ignore) {}
     }
 
@@ -106,11 +106,11 @@ public class ActionTracker implements Runnable {
             Boolean wasTracked = playerBreak.contains(player);
             playerBreak.add(player);
 
+            trackAction(player);
             if (!wasTracked) {
                 ChunkyCitizen citizen = CivManager.getCitizen(ChunkyManager.getChunkyPlayer(player));
                 citizen.incBreakCount();
             }
-            trackAction(player);
         } catch (Exception ignore) {}
     }
 

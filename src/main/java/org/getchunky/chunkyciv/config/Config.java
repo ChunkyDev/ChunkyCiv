@@ -13,7 +13,7 @@ public enum Config {
     DEBUG_MODE("settings.debug_mode.enable", false, "# Enables debug mode."),
     DATA_SAVE_PERIOD("settings.data.save_every", 300, "# This is often plugin data is written to the disk."),
 
-    DEFAULT_NATION_CHUNK_LIMIT("nations.claims.base_per_resident", 50, "# How many chunk claims a nation gets per resident of the nation.");
+    NATION_CHUNK_LIMIT("nations.claims.base_per_resident", 50, "# How many chunk claims a nation gets per resident of the nation.");
 
     private String path;
     private Object def;

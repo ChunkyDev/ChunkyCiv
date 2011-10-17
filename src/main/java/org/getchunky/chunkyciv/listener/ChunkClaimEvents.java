@@ -3,6 +3,7 @@ package org.getchunky.chunkyciv.listener;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.event.object.player.ChunkyPlayerChunkClaimEvent;
 import org.getchunky.chunky.event.object.player.ChunkyPlayerChunkUnclaimEvent;
+import org.getchunky.chunky.event.object.player.ChunkyPlayerClaimLimitQueryEvent;
 import org.getchunky.chunky.listeners.ChunkyPlayerEvents;
 import org.getchunky.chunky.object.ChunkyObject;
 import org.getchunky.chunky.object.ChunkyPlayer;
@@ -15,7 +16,7 @@ import org.getchunky.chunkyciv.object.ChunkyNation;
 /**
  * @author dumptruckman, SwearWord
  */
-public class ChunkClaimEvent extends ChunkyPlayerEvents {
+public class ChunkClaimEvents extends ChunkyPlayerEvents {
 
     public void onPlayerChunkClaim(ChunkyPlayerChunkClaimEvent event) {
         ChunkyCivChunk civChunk = CivManager.getCivChunk(event.getChunkyChunk());
@@ -59,5 +60,10 @@ public class ChunkClaimEvent extends ChunkyPlayerEvents {
                 nation.sendMessage("Unclaiming a chunk has removed " + event.getChunkyPlayer().getName() + " from your nation.");
             }
         }
+    }
+
+    public void onPlayerClaimLimitQuery(ChunkyPlayerClaimLimitQueryEvent event) {
+        ChunkyCitizen citizen = CivManager.getCitizen(event.getChunkyPlayer());
+        event.setLimit(event.getLimit() + (int)(Math.sqrt(citizen.getTotalActionCount())*.7));
     }
 }

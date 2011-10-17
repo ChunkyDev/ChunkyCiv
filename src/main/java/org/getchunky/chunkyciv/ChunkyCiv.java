@@ -93,10 +93,11 @@ public class ChunkyCiv extends JavaPlugin {
     }
 
     private void registerChunkyEvents() {
-        ChunkClaimEvent chunkClaimEvent = new ChunkClaimEvent();
+        ChunkClaimEvents chunkClaimEvents = new ChunkClaimEvents();
         Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CHANGE, new NationNotifyEvent(), ChunkyEvent.Priority.Normal, this);
-        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CLAIM, chunkClaimEvent, ChunkyEvent.Priority.Normal, this);
-        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_UNCLAIM, chunkClaimEvent, ChunkyEvent.Priority.Normal, this);
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CLAIM, chunkClaimEvents, ChunkyEvent.Priority.Normal, this);
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_UNCLAIM, chunkClaimEvents, ChunkyEvent.Priority.Normal, this);
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CLAIM_LIMIT_QUERY, chunkClaimEvents, ChunkyEvent.Priority.Normal, this);
     }
 
     private void registerTasks() {
