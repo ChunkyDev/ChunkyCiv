@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyCommandExecutor;
+import org.getchunky.chunky.object.ChunkyChunk;
 import org.getchunky.chunky.object.ChunkyObject;
 import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunky.permission.bukkit.Permissions;
@@ -50,6 +51,14 @@ public class CmdNationClaim implements ChunkyCommandExecutor {
         }
 
         ChunkyNation civ = citizen.getNation();
+
+        boolean isAdjacent = false;
+        for (ChunkyChunk cChunk : civChunk.getChunkyChunk().getDirectlyAdjacentChunks()) {
+            ChunkyCivChunk adjCivChunk = CivManager.getCivChunk(cChunk);
+            if (adjCivChunk.hasNation()) {
+                adjCivChunk.getNation()
+            }
+        }
 
         if (!Permissions.PLAYER_NO_CHUNK_LIMIT.hasPerm((Player)sender) && civ.getChunks().length() >= civ.getClaimLimit()) {
             Language.NAT_CLAIM_LIMIT.bad(sender, civ.getChunks().length(), civ.getClaimLimit());
