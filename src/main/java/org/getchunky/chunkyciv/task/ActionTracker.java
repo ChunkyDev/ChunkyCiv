@@ -22,25 +22,19 @@ public class ActionTracker implements Runnable {
     private final static HashSet<Player> playerChat = new HashSet<Player>();
     private final static HashSet<Player> playerAction = new HashSet<Player>();
 
+    public void shutDown() {
+        for (Player player : playerAction) {
+            ChunkyManager.getChunkyPlayer(player).save();
+        }
+    }
+
     public void run() {
-        synchronized (playerPlayerAttack) {
-            playerPlayerAttack.clear();
-        }
-        synchronized (playerMonsterAttack) {
-            playerMonsterAttack.clear();
-        }
-        synchronized (playerPlace) {
-            playerPlace.clear();
-        }
-        synchronized (playerBreak) {
-            playerBreak.clear();
-        }
-        synchronized (playerChat) {
-            playerChat.clear();
-        }
-        synchronized (playerAction) {
-            playerAction.clear();
-        }
+        playerPlayerAttack.clear();
+        playerMonsterAttack.clear();
+        playerPlace.clear();
+        playerBreak.clear();
+        playerChat.clear();
+        playerAction.clear();
     }
 
     private static void trackAction(Player player) {

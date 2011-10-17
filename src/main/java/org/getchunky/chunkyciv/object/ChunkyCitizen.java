@@ -84,7 +84,8 @@ public class ChunkyCitizen {
     }
 
     public void incActionCount() {
-        this.getTrackingData().put(ACTION_TOTAL, getTotalActionCount());
+        this.getTrackingData().put(ACTION_TOTAL, getTotalActionCount() + 1);
+        save();
     }
 
     public Long getTotalPlayerAttackCount() {
@@ -92,7 +93,7 @@ public class ChunkyCitizen {
     }
 
     public void incPlayerAttackCount() {
-        this.getTrackingData().put(PLAYER_ATTACK_TOTAL, getTotalPlayerAttackCount());
+        this.getTrackingData().put(PLAYER_ATTACK_TOTAL, getTotalPlayerAttackCount() + 1);
     }
 
     public Long getTotalMonsterAttackCount() {
@@ -100,7 +101,7 @@ public class ChunkyCitizen {
     }
 
     public void incMonsterAttackCount() {
-        this.getTrackingData().put(MONSTER_ATTACK_TOTAL, getTotalMonsterAttackCount());
+        this.getTrackingData().put(MONSTER_ATTACK_TOTAL, getTotalMonsterAttackCount() + 1);
     }
 
     public Long getTotalChatCount() {
@@ -108,7 +109,7 @@ public class ChunkyCitizen {
     }
 
     public void incChatCount() {
-        this.getTrackingData().put(CHAT_TOTAL, getTotalChatCount());
+        this.getTrackingData().put(CHAT_TOTAL, getTotalChatCount() + 1);
     }
 
     public Long getTotalPlaceCount() {
@@ -116,7 +117,7 @@ public class ChunkyCitizen {
     }
 
     public void incPlaceCount() {
-        this.getTrackingData().put(PLACE_TOTAL, getTotalPlaceCount());
+        this.getTrackingData().put(PLACE_TOTAL, getTotalPlaceCount() + 1);
     }
 
     public Long getTotalBreakCount() {
@@ -124,7 +125,7 @@ public class ChunkyCitizen {
     }
 
     public void incBreakCount() {
-        this.getTrackingData().put(BREAK_TOTAL, getTotalBreakCount());
+        this.getTrackingData().put(BREAK_TOTAL, getTotalBreakCount() + 1);
     }
 
     public boolean save() {

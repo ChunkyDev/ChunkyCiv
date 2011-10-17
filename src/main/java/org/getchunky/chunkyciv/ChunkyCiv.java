@@ -98,7 +98,7 @@ public class ChunkyCiv extends JavaPlugin {
     }
 
     private void registerTasks() {
-        getServer().getScheduler().scheduleAsyncRepeatingTask(
+        getServer().getScheduler().scheduleSyncRepeatingTask(
                 this,
                 new ActionTracker(),
                 MinecraftTools.convertSecondsToTicks(60),
