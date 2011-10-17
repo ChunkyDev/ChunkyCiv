@@ -55,26 +55,25 @@ public class ChunkyCitizen {
     public ChunkyNation getNation() {
         if (this.hasNation()) {
             String nationId = this.getData().optString(NATION);
-            Logging.debug("NationId for cit: " + nationId);
             if (this.nation == null || !this.nation.getId().equals(nationId)) {
                 this.nation = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), nationId);
-                Logging.debug("stored nation locally");
             }
-            Logging.debug("cit has nation: " + this.nation);
             return this.nation;
         } else
             return null;
     }
 
     public ChunkyCitizen setNation(ChunkyNation nation) {
-        getData().put(NATION, nation.getId());
+        if (nation == null)
+            getData().remove(NATION);
+        else
+            getData().put(NATION, nation.getId());
         return this;
     }
 
     public Boolean canCivNationClaim() {
         if (!this.hasNation()) return false;
         ChunkyNation civ = this.getNation();
-        Logging.debug("can civ of " + nation + " claim?");
         if (civ.isOwnedBy(this.getChunkyPlayer())) return true;
         if (this.getChunkyPlayer().hasPerm(civ, CivManager.CIV_CLAIM)) return true;
         return false;

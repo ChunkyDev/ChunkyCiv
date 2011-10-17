@@ -3,11 +3,14 @@ package org.getchunky.chunkyciv.object;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyChunk;
 import org.getchunky.chunky.object.ChunkyGroup;
+import org.getchunky.chunky.object.ChunkyObject;
 import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunkyciv.CivManager;
 import org.getchunky.chunkyciv.config.Config;
 import org.getchunky.chunkyciv.util.Logging;
 import org.json.JSONArray;
+
+import java.util.HashSet;
 
 /**
  * @author dumptruckman
@@ -89,5 +92,11 @@ public class ChunkyNation extends ChunkyGroup {
 
     public void setOpenBorders(Boolean status) {
         getData().put(OPEN_BORDERS, status);
+    }
+
+    public void sendMessage(String message, Object...args) {
+        for (ChunkyObject player : this.getMembers().get(ChunkyPlayer.class.getName())) {
+            org.getchunky.chunky.locale.Language.sendMessage((ChunkyPlayer)player, message, args);
+        }
     }
 }

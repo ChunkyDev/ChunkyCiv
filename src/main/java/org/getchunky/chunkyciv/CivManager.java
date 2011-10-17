@@ -11,6 +11,7 @@ import org.getchunky.chunkyciv.object.ChunkyNation;
 import org.getchunky.chunkyciv.util.Logging;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * @author dumptruckman
@@ -69,5 +70,15 @@ public class CivManager {
             chunksMap.put(chunk, civChunk);
         }
         return civChunk;
+    }
+
+    public static boolean checkNationEligibility(ChunkyCitizen citizen) {
+        HashSet<ChunkyObject> objects = citizen.getChunkyPlayer().getOwnables().get(ChunkyChunk.class.getName());
+        if (objects == null) return false;
+        for (ChunkyObject object : objects) {
+            ChunkyCivChunk civChunk = CivManager.getCivChunk((ChunkyChunk)object);
+            if (civChunk.hasNation()) return true;
+        }
+        return false;
     }
 }

@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyCommandExecutor;
+import org.getchunky.chunky.object.ChunkyObject;
+import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunkyciv.CivManager;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.object.ChunkyCitizen;
@@ -40,7 +42,21 @@ public class CmdNationUnclaim implements ChunkyCommandExecutor {
         }
 
         ChunkyNation civ = citizen.getNation();
+        if (civ.getHomeChunk().equals(civChunk)) {
+            sender.sendMessage("You may not unclaim your nation's home chunk!");
+            return;
+        }
+
         civ.unclaimChunk(civChunk);
         Language.NAT_UNCLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
+
+        ChunkyObject chunkOwner = civChunk.getChunkyChunk().getOwner();
+        if (chunkOwner != null && chunkOwner instanceof ChunkyPlayer) {
+            ChunkyCitizen ownerCitizen = CivManager.getCitizen((ChunkyPlayer)chunkOwner);
+            if (!CivManager.checkNationEligibility(ownerCitizen)) {
+                ownerCitizen.setNation(null).save();
+                civ.sendMessage("Unclaiming a chunk has removed " + chunkOwner.getName() + " from your nation.");
+            }
+        }
     }
 }

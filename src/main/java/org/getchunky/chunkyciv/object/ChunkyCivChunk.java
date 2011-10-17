@@ -2,6 +2,9 @@ package org.getchunky.chunkyciv.object;
 
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyChunk;
+import org.getchunky.chunky.object.ChunkyObject;
+import org.getchunky.chunky.object.ChunkyPlayer;
+import org.getchunky.chunkyciv.CivManager;
 import org.getchunky.chunkyciv.util.Logging;
 import org.json.JSONObject;
 
@@ -43,11 +46,23 @@ public class ChunkyCivChunk {
     }
 
     public ChunkyCivChunk setNation(ChunkyNation civ) {
+        ChunkyObject chunkOwner = getChunkyChunk().getOwner();
+
         if (civ == null) {
             this.getData().remove(CHUNK_NATION);
             return this;
         }
         this.getData().put(CHUNK_NATION, civ.getId());
+        
+        if (chunkOwner != null && chunkOwner instanceof ChunkyPlayer) {
+            ChunkyCitizen ownerCitizen = CivManager.getCitizen((ChunkyPlayer)chunkOwner);
+            if (!ownerCitizen.hasNation()) {
+                ownerCitizen.setNation(civ).save();
+                civ.addMember(chunkOwner);
+                civ.sendMessage("Claiming a chunk has added " + chunkOwner.getName() + " to your nation.");
+            }
+        }
+
         return this;
     }
 

@@ -56,7 +56,8 @@ public class CmdNationClaim implements ChunkyCommandExecutor {
             return;
         }
 
-        civ.claimChunk(civChunk);
+        civ.claimChunk(civChunk).save();
+
         Language.NAT_CLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
     }
 }
