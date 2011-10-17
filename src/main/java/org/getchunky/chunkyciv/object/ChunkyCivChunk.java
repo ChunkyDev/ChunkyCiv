@@ -33,7 +33,7 @@ public class ChunkyCivChunk {
 
     public ChunkyNation getNation() {
         String civId = this.getData().optString(CHUNK_NATION);
-        if (civId == null) return null;
+        if (civId.isEmpty()) return null;
         ChunkyNation civ = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), civId);
         if (civ == null) {
             Logging.warning("Chunk belongs to non-existent nation!");
@@ -52,6 +52,10 @@ public class ChunkyCivChunk {
     }
 
     public Boolean hasNation() {
-        return this.getData().optString(CHUNK_NATION) != null;
+        return !this.getData().optString(CHUNK_NATION).isEmpty();
+    }
+
+    public boolean save() {
+        return this.getChunkyChunk().save();
     }
 }

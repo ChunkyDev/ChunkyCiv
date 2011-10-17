@@ -48,14 +48,16 @@ public class CmdNationNew implements ChunkyCommandExecutor {
             }
         }
 
-                String name = PluginTools.combineStringArray(args);
+        String name = PluginTools.combineStringArray(args);
         nation = CivManager.createNation(name);
         if (nation == null) {
-            Language.NAT_EXISTS.bad(sender, nation.getName());
+            Language.NAT_EXISTS.bad(sender, name);
             return;
         }
 
         nation.setOwner(citizen.getChunkyPlayer(), true, false);
         nation.claimChunk(civChunk).setHomeChunk(civChunk.getChunkyChunk()).save();
+        nation.addMember(citizen.getChunkyPlayer());
+        citizen.setNation(nation).save();
     }
 }

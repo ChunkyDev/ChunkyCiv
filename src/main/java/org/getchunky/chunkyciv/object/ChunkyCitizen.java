@@ -3,6 +3,7 @@ package org.getchunky.chunkyciv.object;
 import org.getchunky.chunky.ChunkyManager;
 import org.getchunky.chunky.object.ChunkyPlayer;
 import org.getchunky.chunkyciv.CivManager;
+import org.getchunky.chunkyciv.util.Logging;
 import org.json.JSONObject;
 
 /**
@@ -48,22 +49,32 @@ public class ChunkyCitizen {
     }
 
     public Boolean hasNation() {
-        return this.getData().optString(NATION) != null;
+        return !this.getData().optString(NATION).isEmpty();
     }
 
     public ChunkyNation getNation() {
         if (this.hasNation()) {
             String nationId = this.getData().optString(NATION);
-            if (this.nation == null || !this.nation.getId().equals(nationId))
+            Logging.debug("NationId for cit: " + nationId);
+            if (this.nation == null || !this.nation.getId().equals(nationId)) {
                 this.nation = (ChunkyNation)ChunkyManager.getObject(ChunkyNation.class.getName(), nationId);
+                Logging.debug("stored nation locally");
+            }
+            Logging.debug("cit has nation: " + this.nation);
             return this.nation;
         } else
             return null;
     }
 
-    public Boolean canCivClaim() {
+    public ChunkyCitizen setNation(ChunkyNation nation) {
+        getData().put(NATION, nation.getId());
+        return this;
+    }
+
+    public Boolean canCivNationClaim() {
         if (!this.hasNation()) return false;
         ChunkyNation civ = this.getNation();
+        Logging.debug("can civ of " + nation + " claim?");
         if (civ.isOwnedBy(this.getChunkyPlayer())) return true;
         if (this.getChunkyPlayer().hasPerm(civ, CivManager.CIV_CLAIM)) return true;
         return false;
@@ -115,5 +126,9 @@ public class ChunkyCitizen {
 
     public void incBreakCount() {
         this.getTrackingData().put(BREAK_TOTAL, getTotalBreakCount());
+    }
+
+    public boolean save() {
+        return this.getChunkyPlayer().save();
     }
 }

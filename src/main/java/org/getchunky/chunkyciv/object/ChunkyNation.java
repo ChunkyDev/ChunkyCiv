@@ -39,7 +39,7 @@ public class ChunkyNation extends ChunkyGroup {
         }
         chunks.put(civChunk.getChunkyChunk().getId());
         getData().put(CLAIMED_CHUNKS, chunks);
-        civChunk.setNation(this);
+        civChunk.setNation(this).save();
         return this;
     }
 

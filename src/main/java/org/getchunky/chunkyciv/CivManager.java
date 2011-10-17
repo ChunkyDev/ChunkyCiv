@@ -35,7 +35,10 @@ public class CivManager {
 
     public static ChunkyNation getNation(String name) {
         ChunkyNation nation = nationsMap.get(name);
+        Logging.debug("Name: " + name + " in " + nationsMap);
         if (nation == null) {
+            HashMap<String, ChunkyObject> objectsOfType = ChunkyManager.getObjectsOfType(ChunkyNation.class.getName());
+            if (objectsOfType == null) return null;
             for (ChunkyObject object : ChunkyManager.getObjectsOfType(ChunkyNation.class.getName()).values()) {
                 if (object.getName().equalsIgnoreCase(name)) {
                     nation = (ChunkyNation)object;

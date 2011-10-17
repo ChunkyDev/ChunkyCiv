@@ -23,7 +23,7 @@ public class CmdNationUnclaim implements ChunkyCommandExecutor {
             Language.NO_NAT.bad(sender);
             return;
         }
-        if (!citizen.canCivClaim()) {
+        if (!citizen.canCivNationClaim()) {
             Language.NAT_NO_PERM_UNCLAIM.bad(sender);
             return;
         }

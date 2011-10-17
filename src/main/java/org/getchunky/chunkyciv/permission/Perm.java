@@ -11,7 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author dumptruckman
  */
 public enum Perm {
-    NATION_CREATE("chunkyciv.nation.create"),;
+    NATION_CREATE("chunkyciv.nation.create"),
+    ;
 
     private Permission perm;
 
