@@ -56,6 +56,23 @@ command:
       - 'Abandon a chunk claimed by your nation.'
       description:
       - 'Abandons this chunk as part of your nation'
+      
+    set:
+      help:
+      - 'Changes various settings for your nation.'
+      - 'Type &e/nation set ?&f for a list of settings.'
+      - 'Usage: &e/nation set <setting> <value>'
+      description:
+      - 'Changes various settings for your nation.'
+      
+      borders:
+        help:
+        - 'Sets open or closed border policy.'
+        - 'Open borders allows anyone without a nation to claim land in and join your nation.'
+        - 'Closed borders only allows nation residents to claim land in your nation.'
+        - 'Usage: &e/nation set borders <open|closed>'
+        description:
+        - 'Sets open or closed border policy.'
     
     
     
@@ -76,6 +93,8 @@ chunk:
   
   
 nat:
+  new:
+  - 'You created a new nation named: %1'
   no_nat:
   - 'You do not belong to a nation!'
   has_nat:

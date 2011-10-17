@@ -11,10 +11,7 @@ import org.getchunky.chunky.module.ChunkyCommand;
 import org.getchunky.chunky.module.ChunkyPermissions;
 import org.getchunky.chunkyciv.command.*;
 import org.getchunky.chunkyciv.config.Config;
-import org.getchunky.chunkyciv.listener.BlockMonitor;
-import org.getchunky.chunkyciv.listener.ChunkyPlayerEvents;
-import org.getchunky.chunkyciv.listener.EntityMonitor;
-import org.getchunky.chunkyciv.listener.PlayerMonitor;
+import org.getchunky.chunkyciv.listener.*;
 import org.getchunky.chunkyciv.locale.Language;
 import org.getchunky.chunkyciv.permission.Perm;
 import org.getchunky.chunkyciv.task.ActionTracker;
@@ -96,7 +93,8 @@ public class ChunkyCiv extends JavaPlugin {
     }
 
     private void registerChunkyEvents() {
-        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CHANGE, new ChunkyPlayerEvents(), ChunkyEvent.Priority.Normal, this);
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CHANGE, new NationNotifyEvent(), ChunkyEvent.Priority.Normal, this);
+        Chunky.getModuleManager().registerEvent(ChunkyEvent.Type.PLAYER_CHUNK_CLAIM, new ChunkClaimEvent(), ChunkyEvent.Priority.Normal, this);
     }
 
     private void registerTasks() {
@@ -143,6 +141,20 @@ public class ChunkyCiv extends JavaPlugin {
                     .setInGameOnly(true)
                     //.setPermission(Perm.NATION_UNCLAIM.getPermission())
                     .register();
+
+            ChunkyCommand nationSet = new ChunkyCommand("set", new CmdNationSet(), nation)
+                    .setAliases("s")
+                    .setDescription(Language.CMD_NAT_SET_DESC.getString())
+                    .setHelpLines(Language.CMD_NAT_SET_HELP.getStrings())
+                    .setInGameOnly(true)
+                    .register();
+
+            ChunkyCommand nationSetBorders = new ChunkyCommand("set", new CmdNationSetBorders(), nationSet)
+                    .setDescription(Language.CMD_NAT_SET_BORDERS_DESC.getString())
+                    .setHelpLines(Language.CMD_NAT_SET_BORDERS_HELP.getStrings())
+                    .setInGameOnly(true)
+                    .register();
+
         } catch (ChunkyUnregisteredException ignore) {}
     }
 

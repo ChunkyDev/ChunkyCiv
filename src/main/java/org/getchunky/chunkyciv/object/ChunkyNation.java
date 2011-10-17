@@ -17,6 +17,7 @@ public class ChunkyNation extends ChunkyGroup {
     private static String HOME_CHUNK = "home chunk";
     private static String CLAIMED_CHUNKS = "claimed chunks";
     private static String BONUS_CHUNKS = "bonus chunk claims";
+    private static String OPEN_BORDERS = "open borders";
 
     public ChunkyCivChunk getHomeChunk() {
         String homeChunk = getData().optString(HOME_CHUNK);
@@ -80,5 +81,13 @@ public class ChunkyNation extends ChunkyGroup {
     public void setBonusChunks(Integer limit) {
         getData().put(BONUS_CHUNKS, limit);
         save();
+    }
+
+    public Boolean isClosedBorders() {
+        return getData().optBoolean(OPEN_BORDERS);
+    }
+
+    public void setOpenBorders(Boolean status) {
+        getData().put(OPEN_BORDERS, status);
     }
 }

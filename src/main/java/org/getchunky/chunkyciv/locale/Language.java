@@ -32,7 +32,10 @@ public enum Language {
     CMD_NAT_CLAIM_DESC("command.nat.claim.description"),
     CMD_NAT_UNCLAIM_HELP("command.nat.unclaim.help"),
     CMD_NAT_UNCLAIM_DESC("command.nat.unclaim.description"),
-
+    CMD_NAT_SET_HELP("command.nat.set.help"),
+    CMD_NAT_SET_DESC("command.nat.set.description"),
+    CMD_NAT_SET_BORDERS_HELP("command.nat.set.borders.help"),
+    CMD_NAT_SET_BORDERS_DESC("command.nat.set.borders.description"),
 
     NO_TOWN("town.no_town"),
 
@@ -41,7 +44,8 @@ public enum Language {
     CHUNK_NO_NAT("chunk.no_nat"),
     CHUNK_NAT("chunk.nat"),
 
-    
+
+    NAT_NEW("nat.new"),
     NO_NAT("nat.no_nat"),
     HAS_NAT("nat.has_nat"),
     NAT_EXISTS("nat.already_exists"),

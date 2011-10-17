@@ -9,7 +9,7 @@ import org.getchunky.chunkyciv.object.ChunkyNation;
 /**
  * @author dumptruckman, SwearWord
  */
-public class ChunkyPlayerEvents extends ChunkyPlayerListener {
+public class NationNotifyEvent extends ChunkyPlayerListener {
 
     public void onPlayerChunkChange(ChunkyPlayerChunkChangeEvent event) {
         ChunkyCivChunk civToChunk = CivManager.getCivChunk(event.getToChunk());
