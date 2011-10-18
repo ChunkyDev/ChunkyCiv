@@ -29,10 +29,10 @@ public class ChunkyNation extends ChunkyGroup {
 
     private Integer claimMultiple;
 
-    public void load(String json) {
+    /*public void load(String json) {
         super.load(json);
         this.claimMultiple = Config.NATION_CHUNK_LIMIT.getInt() / org.getchunky.chunky.config.Config.getPlayerChunkLimitDefault();
-    }
+    }*/
 
     public ChunkyCivChunk getHomeChunk() {
         String homeChunk = getData().optString(HOME_CHUNK);
