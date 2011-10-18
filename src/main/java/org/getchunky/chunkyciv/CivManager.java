@@ -64,6 +64,7 @@ public class CivManager {
     }
     
     public static ChunkyCivChunk getCivChunk(ChunkyChunk chunk) {
+        if (chunk == null) return null;
         ChunkyCivChunk civChunk = chunksMap.get(chunk);
         if (civChunk == null) {
             civChunk = new ChunkyCivChunk(chunk);
