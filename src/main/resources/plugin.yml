@@ -9,3 +9,7 @@ permissions:
     chunkyciv.nation.create:
         description: Allows players to create nations.
         default: op
+        
+commands:
+    nation:
+        description: Nations stuff
