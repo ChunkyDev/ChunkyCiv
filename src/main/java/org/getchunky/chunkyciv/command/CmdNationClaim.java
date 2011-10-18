@@ -1,5 +1,6 @@
 package org.getchunky.chunkyciv.command;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.getchunky.chunky.ChunkyManager;
@@ -50,23 +51,31 @@ public class CmdNationClaim implements ChunkyCommandExecutor {
             }
         }
 
-        ChunkyNation civ = citizen.getNation();
+        ChunkyNation nation = citizen.getNation();
 
-        boolean isAdjacent = false;
+        boolean adjacent = false;
         for (ChunkyChunk cChunk : civChunk.getChunkyChunk().getDirectlyAdjacentChunks()) {
             ChunkyCivChunk adjCivChunk = CivManager.getCivChunk(cChunk);
             if (adjCivChunk.hasNation()) {
-                adjCivChunk.getNation()
+                if (adjCivChunk.getNation().equals(nation)) {
+                    adjacent = true;
+                    break;
+                }
             }
         }
 
-        if (!Permissions.PLAYER_NO_CHUNK_LIMIT.hasPerm((Player)sender) && civ.getChunks().length() >= civ.getClaimLimit()) {
-            Language.NAT_CLAIM_LIMIT.bad(sender, civ.getChunks().length(), civ.getClaimLimit());
+        if (!adjacent) {
+            sender.sendMessage(ChatColor.RED + "You must claim adjacent to existing nation claims!");
             return;
         }
 
-        civ.claimChunk(civChunk).save();
+        if (!Permissions.PLAYER_NO_CHUNK_LIMIT.hasPerm((Player)sender) && nation.getChunks().length() >= nation.getClaimLimit()) {
+            Language.NAT_CLAIM_LIMIT.bad(sender, nation.getChunks().length(), nation.getClaimLimit());
+            return;
+        }
 
-        Language.NAT_CLAIM_CHUNK.good(sender, civ.getName(), civChunk.getChunkyChunk().getCoord().toString());
+        nation.claimChunk(civChunk).save();
+
+        Language.NAT_CLAIM_CHUNK.good(sender, nation.getName(), civChunk.getChunkyChunk().getCoord().toString());
     }
 }
