@@ -1,9 +1,9 @@
-package org.getchunky.chunkyciv.listener;
+package org.getchunky.actiontracker.listener;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerListener;
-import org.getchunky.chunkyciv.task.ActionTracker;
+import org.getchunky.actiontracker.task.ActionTracker;
 
 /**
  * @author dumptruckman
